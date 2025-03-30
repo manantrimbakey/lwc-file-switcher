@@ -1,0 +1,119 @@
+{
+  "name": "lwc-file-switcher",
+  "displayName": "LWC File Switcher",
+  "description": "Quickly switch between files of a Lightning Web Component",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.98.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:html",
+    "onLanguage:javascript",
+    "onLanguage:css",
+    "onLanguage:xml"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "lwc-file-switcher.switchFile",
+        "title": "LWC: Switch Component File"
+      },
+      {
+        "command": "lwc-file-switcher.switchFileContext",
+        "title": "LWC: Switch Component File"
+      },
+      {
+        "command": "lwc-file-switcher.switchToFile",
+        "title": "LWC: Switch To Specific Component File"
+      },
+      {
+        "command": "lwc-file-switcher.toggleStickyHeader",
+        "title": "LWC: Toggle Component Files Panel"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "lwcFileSwitcher.fileListView",
+          "name": "LWC Component Files",
+          "type": "webview",
+          "when": "lwcFileSwitcher.showPanel"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "lwc-file-switcher.switchFile",
+        "key": "alt+o",
+        "mac": "alt+o",
+        "when": "editorTextFocus"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "lwc-file-switcher.switchFileContext",
+          "group": "navigation",
+          "when": "resourceExtname =~ /\\.(js|html|css|xml)/"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "LWC File Switcher",
+      "properties": {
+        "lwcFileSwitcher.enableCodeLens": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable code lens for switching between LWC component files"
+        },
+        "lwcFileSwitcher.enableStatusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show a status bar item for quickly switching between LWC component files"
+        },
+        "lwcFileSwitcher.enableHover": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show available component files when hovering over component names"
+        },
+        "lwcFileSwitcher.enableStickyHeader": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the LWC File Switcher panel in the Explorer sidebar"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run package",
+    "compile": "pnpm run check-types && pnpm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "pnpm run check-types && pnpm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "pnpm run compile-tests && pnpm run compile && pnpm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.98.0",
+    "@typescript-eslint/eslint-plugin": "^8.28.0",
+    "@typescript-eslint/parser": "^8.28.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
+    "esbuild": "^0.25.1",
+    "eslint": "^9.23.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2"
+  }
+}

@@ -1,0 +1,31 @@
+# Dependency directories
+node_modules/
+dist/
+out/
+
+# Build output
+*.vsix
+
+# Config and metadata files
+.vscode/
+.vscode-test/
+.vs/
+coverage/
+
+# Package lock files
+package-lock.json
+yarn.lock
+
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Editor backup files
+*~
+*.swp
