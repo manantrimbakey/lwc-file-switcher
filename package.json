@@ -2,7 +2,7 @@
   "name": "lwc-file-switcher",
   "displayName": "LWC File Switcher",
   "description": "Quickly switch between files of a Lightning Web Component",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "icon": "images/icon.png",
   "engines": {
     "vscode": "^1.90.0"
