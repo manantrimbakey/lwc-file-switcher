@@ -1,13 +1,13 @@
 import * as vscode from "vscode";
 import * as path from "path";
-import { 
-    getFilesInDirectory, 
-    isLwcFile, 
-    getFileTypeDescription, 
-    getFileTypeColor, 
+import {
+    getFilesInDirectory,
+    isLwcFile,
+    getFileTypeDescription,
+    getFileTypeColor,
     getFileTypeClass,
     filterComponentFiles,
-    getFilePriority
+    getFilePriority,
 } from "../utils/fileUtils";
 
 /**
@@ -466,4 +466,4 @@ export class LwcFileListProvider implements vscode.WebviewViewProvider {
 		</body>
 		</html>`;
     }
-} 
+}

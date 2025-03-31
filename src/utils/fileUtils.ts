@@ -19,15 +19,15 @@ export async function getFilesInDirectory(directory: string): Promise<string[]> 
                 resolve(files.map((file) => path.join(directory, file)));
             });
         });
-        
+
         // Check if __tests__ directory exists
         const testsDir = path.join(directory, "__tests__");
         let testFiles: string[] = [];
-        
+
         try {
             // Check if the directory exists
             await fs.promises.access(testsDir, fs.constants.F_OK);
-            
+
             // Get files in the __tests__ directory
             testFiles = await new Promise<string[]>((resolve, reject) => {
                 fs.readdir(testsDir, (err, files) => {
@@ -42,7 +42,7 @@ export async function getFilesInDirectory(directory: string): Promise<string[]> 
             // __tests__ directory does not exist, continue with empty array
             testFiles = [];
         }
-        
+
         // Combine and return all files
         return [...mainDirFiles, ...testFiles];
     } catch (err) {
@@ -134,23 +134,34 @@ export function getFileTypeClass(fileName: string, filePath?: string): string {
 }
 
 /**
- * Checks if a file is part of an LWC component
+ * Checks if a file is part of an LWC component by verifying:
+ * 1. The component folder is inside an 'lwc' directory
+ * 2. The component folder contains a .js-meta.xml file
+ * 3. The file has a valid LWC extension
  */
 export function isLwcFile(filePath: string): boolean {
-    const baseName = path.basename(filePath);
+    // Check if file is in an 'lwc' directory
+    const normalizedPath = path.normalize(filePath);
+    if (!normalizedPath.includes(path.sep + "lwc" + path.sep)) {
+        return false;
+    }
+
     const extName = path.extname(filePath);
+    const directory = path.dirname(filePath);
+    const componentName = path.basename(directory);
 
-    // Direct check for standard extensions
-    if (LWC_EXTENSIONS.includes(extName)) {
-        return true;
+    // Check for valid LWC extension
+    if (!LWC_EXTENSIONS.includes(extName)) {
+        return false;
     }
 
-    // Special check for XML files
-    if (baseName.endsWith(".js-meta.xml")) {
-        return true;
+    // Check for .js-meta.xml file in the component directory
+    const metaFilePath = path.join(directory, `${componentName}.js-meta.xml`);
+    try {
+        return fs.existsSync(metaFilePath);
+    } catch (error) {
+        return false;
     }
-
-    return false;
 }
 
 /**
@@ -162,19 +173,19 @@ export function getFilePriority(fileName: string, filePath?: string): number {
     if (filePath && path.dirname(filePath).endsWith("__tests__")) {
         return 100; // Lowest priority
     }
-    
+
     const ext = path.extname(fileName);
-    
+
     // Check for .js-meta.xml files (second lowest priority)
     if (fileName.endsWith(".js-meta.xml")) {
         return 90;
     }
-    
+
     // Check for test files with .test.js extension (third lowest priority)
     if (fileName.endsWith(".test.js")) {
         return 80;
     }
-    
+
     // Priorities for other file types
     switch (ext) {
         case ".html":
@@ -197,17 +208,17 @@ export function filterComponentFiles(files: string[], componentName: string, cur
     return files.filter((file) => {
         const fileName = path.basename(file);
         const fileDir = path.dirname(file);
-        
+
         // Check if it's a test file in the __tests__ folder
         if (fileDir.endsWith("__tests__")) {
             // For test files, check if they contain the component name
             return fileName.includes(componentName) && file !== currentFilePath;
         }
-        
+
         // For regular files in the component folder
         return (
             (fileName.startsWith(componentName + ".") || fileName === `${componentName}.js-meta.xml`) &&
             file !== currentFilePath
         );
     });
-} 
+}
