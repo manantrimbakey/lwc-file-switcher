@@ -151,7 +151,7 @@ export function isLwcFile(filePath: string): boolean {
     const componentName = path.basename(directory);
 
     // Check for valid LWC extension
-    if (!LWC_EXTENSIONS.includes(extName)) {
+    if (!LWC_EXTENSIONS.includes(extName) && !filePath.endsWith(".js-meta.xml")) {
         return false;
     }
 

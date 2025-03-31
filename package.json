@@ -76,11 +76,6 @@
           "default": true,
           "description": "Show a status bar item for quickly switching between LWC component files"
         },
-        "lwcFileSwitcher.enableHover": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show available component files when hovering over component names"
-        },
         "lwcFileSwitcher.enableStickyHeader": {
           "type": "boolean",
           "default": true,

@@ -17,7 +17,6 @@ import {
 
 // Import providers
 import { LwcFileListProvider } from "./providers/LwcFileListProvider";
-import { LwcFileSwitcherHoverProvider } from "./providers/LwcHoverProvider";
 import { LwcFileSwitcherCodeLensProvider } from "./providers/LwcCodeLensProvider";
 
 // This method is called when your extension is activated
@@ -130,17 +129,6 @@ export function activate(context: vscode.ExtensionContext) {
         codeLensProvider,
     );
 
-    // Register hover provider for floating component switches
-    const hoverProvider = vscode.languages.registerHoverProvider(
-        [
-            { language: "html", scheme: "file" },
-            { language: "javascript", scheme: "file" },
-            { language: "css", scheme: "file" },
-            { language: "xml", scheme: "file" },
-        ],
-        new LwcFileSwitcherHoverProvider(),
-    );
-
     // Register the toggle command for the panel
     const toggleViewCommand = vscode.commands.registerCommand("lwc-file-switcher.toggleStickyHeader", () => {
         const config = vscode.workspace.getConfiguration("lwcFileSwitcher");
@@ -235,7 +223,6 @@ export function activate(context: vscode.ExtensionContext) {
         switchToFileCommand,
         editorContextCommand,
         codeLensProviderDisposable,
-        hoverProvider,
         toggleViewCommand,
     );
 

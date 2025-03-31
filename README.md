@@ -15,7 +15,6 @@ This extension allows you to quickly navigate between different files of a Light
 - **Test Files Support** - Automatically finds and includes test files in the `__tests__` folder
 - **Code Lens** - View and switch to component files directly from the editor
 - **Status Bar** - Always visible component switcher in the status bar
-- **Hover Information** - View available component files by hovering over component names
 - Supports all LWC file types including:
   - HTML templates (`.html`) - <span style="color: #e44d26">Orange</span>
   - JavaScript controllers (`.js`) - <span style="color: #f0db4f">Yellow</span>
@@ -30,7 +29,6 @@ This extension allows you to quickly navigate between different files of a Light
 2. Use one of the following methods to switch to another file in the component:
    - **Using Explorer Panel**: The LWC Component Files panel in the Explorer sidebar shows all related files
    - **Using Status Bar**: Click on the "LWC: componentName" item in the status bar (always visible)
-   - **Using Hover**: Hover over the component name in the first few lines to see available files
    - **Using Code Lens**: Click on one of the file links shown at the top of the file
    - Press `Alt+O` (Windows/Linux) or `Option+O` (Mac)
    - Right-click in the editor and select "LWC: Switch Component File" from the context menu
@@ -53,7 +51,6 @@ This extension contributes the following settings:
 
 * `lwcFileSwitcher.enableCodeLens`: Enable/disable code lens for switching between component files (default: true)
 * `lwcFileSwitcher.enableStatusBar`: Enable/disable the status bar item for quick file switching (default: true)
-* `lwcFileSwitcher.enableHover`: Enable/disable hover information showing available component files (default: true)
 * `lwcFileSwitcher.enableStickyHeader`: Enable/disable the LWC Component Files panel in the Explorer sidebar (default: true)
 
 ## Known Issues
