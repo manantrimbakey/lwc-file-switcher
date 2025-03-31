@@ -140,16 +140,17 @@ export class LwcFileListProvider implements vscode.WebviewViewProvider {
 					justify-content: space-between;
 					align-items: center;
 					padding: 4px 8px;
-					background-color: var(--vscode-button-secondaryBackground);
-					color: var(--vscode-button-secondaryForeground);
-					border: none;
+					background-color: var(--vscode-list-hoverBackground, rgba(0, 0, 0, 0.05));
+					color: var(--vscode-editor-foreground);
+					border: 1px solid var(--vscode-list-focusOutline, transparent);
 					border-radius: 2px;
 					cursor: pointer;
 					text-align: left;
 					transition: background-color 0.2s;
 				}
 				.file-button:hover {
-					background-color: var(--vscode-button-secondaryHoverBackground);
+					background-color: var(--vscode-list-activeSelectionBackground);
+					color: var(--vscode-list-activeSelectionForeground);
 				}
 				.file-type {
 					font-size: 90%;
@@ -204,7 +205,7 @@ export class LwcFileListProvider implements vscode.WebviewViewProvider {
 					100% { opacity: 0.6; }
 				}
 				.file-name {
-					color: var(--vscode-editor-foreground);
+					color: inherit;
 				}
 				.no-files {
 					color: var(--vscode-disabledForeground);
@@ -239,6 +240,23 @@ export class LwcFileListProvider implements vscode.WebviewViewProvider {
 				.component-header {
 					margin-bottom: 8px;
 					font-weight: bold;
+				}
+				.file-button {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					padding: 4px 8px;
+					background-color: var(--vscode-list-hoverBackground, rgba(0, 0, 0, 0.05));
+					color: var(--vscode-editor-foreground);
+					border: 1px solid var(--vscode-list-focusOutline, transparent);
+					border-radius: 2px;
+					cursor: pointer;
+					text-align: left;
+					transition: background-color 0.2s;
+				}
+				.file-button:hover {
+					background-color: var(--vscode-list-activeSelectionBackground);
+					color: var(--vscode-list-activeSelectionForeground);
 				}
 				.file-type {
 					font-size: 90%;
@@ -372,16 +390,17 @@ export class LwcFileListProvider implements vscode.WebviewViewProvider {
 					justify-content: space-between;
 					align-items: center;
 					padding: 4px 8px;
-					background-color: var(--vscode-button-secondaryBackground);
-					color: var(--vscode-button-secondaryForeground);
-					border: none;
+					background-color: var(--vscode-list-hoverBackground, rgba(0, 0, 0, 0.05));
+					color: var(--vscode-editor-foreground);
+					border: 1px solid var(--vscode-list-focusOutline, transparent);
 					border-radius: 2px;
 					cursor: pointer;
 					text-align: left;
 					transition: background-color 0.2s;
 				}
 				.file-button:hover {
-					background-color: var(--vscode-button-secondaryHoverBackground);
+					background-color: var(--vscode-list-activeSelectionBackground);
+					color: var(--vscode-list-activeSelectionForeground);
 				}
 				.file-type {
 					font-size: 90%;
@@ -436,7 +455,7 @@ export class LwcFileListProvider implements vscode.WebviewViewProvider {
 					100% { opacity: 0.6; }
 				}
 				.file-name {
-					color: var(--vscode-editor-foreground);
+					color: inherit;
 				}
 			</style>
 		</head>
