@@ -28,7 +28,7 @@ This extension allows you to quickly navigate between different files of a Light
 Watch these short demonstrations of the extension in action:
 
 ### Quick File Switching
-![Quick File Switching](docs/quick-switch.gif)
+![Quick File Switching](./docs/quick-switch.gif)
 
 ## How to Use
 
