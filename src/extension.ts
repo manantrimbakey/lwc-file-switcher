@@ -29,9 +29,8 @@ export function activate(context: vscode.ExtensionContext) {
 
     // Initialize the panel visibility state based on settings
     const initialConfig = vscode.workspace.getConfiguration("lwcFileSwitcher");
-    if (initialConfig.get("enableStickyHeader", true)) {
-        vscode.commands.executeCommand("setContext", showPanelKey, true);
-    }
+    const isEnabled = initialConfig.get("enableStickyHeader", true);
+    vscode.commands.executeCommand("setContext", showPanelKey, isEnabled);
 
     // Create status bar item for the bottom status bar
     const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
@@ -42,7 +41,9 @@ export function activate(context: vscode.ExtensionContext) {
     // Register the file switcher view provider
     const fileListProvider = new LwcFileListProvider(context.extensionUri);
     const view = vscode.window.registerWebviewViewProvider("lwcFileSwitcher.fileListView", fileListProvider, {
-        webviewOptions: { retainContextWhenHidden: true },
+        webviewOptions: { 
+            retainContextWhenHidden: true
+        },
     });
     context.subscriptions.push(view);
 
@@ -206,15 +207,30 @@ export function activate(context: vscode.ExtensionContext) {
         }),
     );
 
+    // Listen for tab close events
+    context.subscriptions.push(
+        vscode.workspace.onDidCloseTextDocument(async (document: vscode.TextDocument) => {
+            const editor = vscode.window.activeTextEditor;
+            if (!editor) {
+                // If no active editor, update the webview to show no component
+                await fileListProvider.updateFileList(undefined);
+            } else if (isLwcFile(editor.document.uri.fsPath)) {
+                // If the new active editor is an LWC file, update the webview
+                await fileListProvider.updateFileList(editor);
+            }
+        }),
+    );
+
     // Initial update of status bar item
     updateStatusBarItem(vscode.window.activeTextEditor);
 
     // Show the view initially if it's enabled
-    const viewConfig = vscode.workspace.getConfiguration("lwcFileSwitcher");
-    if (viewConfig.get("enableStickyHeader", true)) {
+    if (isEnabled) {
         // The view will be updated when it becomes visible
         setTimeout(() => {
             vscode.commands.executeCommand("lwcFileSwitcher.fileListView.focus");
+            // Ensure the view is visible
+            vscode.commands.executeCommand("workbench.view.explorer");
         }, 1000);
     }
 

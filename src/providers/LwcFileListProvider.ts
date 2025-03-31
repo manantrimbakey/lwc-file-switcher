@@ -55,7 +55,13 @@ export class LwcFileListProvider implements vscode.WebviewViewProvider {
      * Updates the file list in the webview
      */
     async updateFileList(editor: vscode.TextEditor | undefined) {
-        if (!this._view || !this._view.visible || !editor) {
+        if (!this._view || !this._view.visible) {
+            return;
+        }
+
+        // If no editor is active, show the initial state
+        if (!editor) {
+            this._view.webview.html = this._getInitialHtml();
             return;
         }
 
