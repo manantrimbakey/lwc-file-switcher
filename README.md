@@ -62,6 +62,6 @@ This extension contributes the following settings:
 
 ## Known Issues
 
-- None currently
+- None currently, but if you find please open up an issue on repo.
 
 **Enjoy!**
