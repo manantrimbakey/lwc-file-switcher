@@ -23,6 +23,13 @@ This extension allows you to quickly navigate between different files of a Light
   - Test files (`.test.js` or in `__tests__` folder) - <span style="color: #9c27b0">Purple</span>
   - SVG resources (`.svg`) - <span style="color: #ffb13b">Amber</span>
 
+## Demo
+
+Watch these short demonstrations of the extension in action:
+
+### Quick File Switching
+![Quick File Switching](docs/quick-switch.gif)
+
 ## How to Use
 
 1. Open any file belonging to an LWC component (HTML, JS, CSS, etc.)
