@@ -13,10 +13,10 @@ A Visual Studio Code extension to quickly switch between files of a Lightning We
 Check out how easy it is to use:
 
 ### Quick File Switching
-![Switch between component files with a click](./docs/quick-switch.gif)
+![Switch between component files with a click](https://raw.githubusercontent.com/manantrimbakey/lwc-file-switcher/main/docs/quick-switch-shortcut.gif)
 *Click through the LWC Component Files panel to quickly access any file in your component*
 
-![Press Alt+O to switch instantly](./docs/quick-switch-shortcut.gif)
+![Press Alt+O to switch instantly](https://raw.githubusercontent.com/manantrimbakey/lwc-file-switcher/main/docs/quick-switch.gif)
 *Use the Alt+O shortcut to instantly jump between component files without taking your hands off the keyboard*
 
 ## How to Use
