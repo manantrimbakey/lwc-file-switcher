@@ -23,6 +23,20 @@ const esbuildProblemMatcherPlugin = {
 	},
 };
 
+/**
+ * Plugin to exclude specific directories from the build
+ * @type {import('esbuild').Plugin}
+ */
+const excludeDocsPlugin = {
+	name: 'exclude-docs',
+	setup(build) {
+		// Filter out anything in the docs directory
+		build.onResolve({ filter: /^docs\// }, () => {
+			return { external: true };
+		});
+	},
+};
+
 async function main() {
 	const ctx = await esbuild.context({
 		entryPoints: [
@@ -38,7 +52,7 @@ async function main() {
 		external: ['vscode'],
 		logLevel: 'silent',
 		plugins: [
-			/* add to the end of plugins array */
+			excludeDocsPlugin,
 			esbuildProblemMatcherPlugin,
 		],
 	});
